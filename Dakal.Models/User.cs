@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -18,22 +19,20 @@ namespace Dakal.Models
         public string FirmPackageName { get; set; }
         public uint Age
         {
-            get
-            {
-                return Age;
-            }
-            set
-            {
-                if (value > 130)
-                    throw new ArgumentException("User Age can not be greater than 130");
-                else
-                    Age = value;
-            }
+            get; set;
+            //get
+            //{
+            //    return Age;
+            //}
+            //set
+            //{
+            //    if (value > 130 || value < 10)
+            //        throw new ArgumentException("User Age must be between 10-130");
+            //    else
+            //        Age = value;
+            //}
         }
 
         public Gender Gender { get; set; }
-
-       
-
     }
 }

@@ -8,9 +8,9 @@ using Dakal.Models;
 
 namespace Dakal.AppService
 {
-    public interface IUserService
+    public interface IAdvertisementService
     {
-        Task<bool> IsUserExist(string username, string appName);
-        Task<bool> CreateUser(string username,string appName,string age,Gender gender);
+        Task<Advertisement> GetAdvertisement(uint age, Gender gender);
+        
     }
 }

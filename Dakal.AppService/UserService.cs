@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dakal.Models;
 using Dakal.Repositories;
 
 namespace Dakal.AppService
@@ -15,6 +16,12 @@ namespace Dakal.AppService
         {
             userRepository = _userRepositroy;
         }
+
+        public Task<bool> CreateUser(string username, string appName, string age, Gender gender)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<bool> IsUserExist(string username, string appName)
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(appName))
