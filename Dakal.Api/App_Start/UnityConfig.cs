@@ -5,6 +5,7 @@ using Unity;
 using Microsoft.Practices.Unity;
 using Microsoft.ApplicationInsights.Extensibility.PerfCounterCollector;
 using Unity.AspNet.Mvc;
+using Unity.Lifetime;
 
 namespace Dakal.Api
 {
@@ -51,7 +52,10 @@ namespace Dakal.Api
             container.RegisterType<IAdvertisementRepository, AdvertisementRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IUserService, UserService>(new PerRequestLifetimeManager());
             container.RegisterType<IAdvertisementService, AdvertisementService>(new PerRequestLifetimeManager());
-
+            container.RegisterType<ILoggerService, LoggerService>(new PerRequestLifetimeManager());
+            container.RegisterType<IUnitOfWork, UnitOfWork>(new PerRequestLifetimeManager());
+            container.RegisterType<ISeenAdsRepository, SeenAdsRepository>(new PerRequestLifetimeManager());
+            container.RegisterType<ISeenAdsService, SeenAdsService>(new PerRequestLifetimeManager());
         }
     }
 }

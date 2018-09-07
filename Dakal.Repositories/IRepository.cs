@@ -10,9 +10,9 @@ namespace Dakal.Repositories
     public interface IRepository<T> where T : Entity
     {
         IQueryable<T> Queryable();
-        Task<T> GetById(uint id);
-        Task<bool> Insert(T obj);
+        Task<T> GetById(long id);
+        Task<T> Insert(T obj);
         Task<bool> Update(T obj);
-        Task<bool> Delete(uint id);
+        Task<bool> Delete(long id);
     }
 }

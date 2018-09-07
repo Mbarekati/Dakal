@@ -52,6 +52,7 @@
     <Compile Include="Entity.cs" />
     <Compile Include="Firm.cs" />
     <Compile Include="Gender.cs" />
+    <Compile Include="SeenAds.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

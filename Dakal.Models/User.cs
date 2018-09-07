@@ -10,29 +10,31 @@ namespace Dakal.Models
 {
     public class User : Entity
     {
-        [Index("IX_UniqeUserContraint", 1, IsUnique = true)]
+        internal User() { }
+        public User(string username, string appPackageName, uint age, Gender gender, long firmId)
+        {
+            Username = username;
+            FirmPackageName = appPackageName;
+            Age = age;
+            Gender = gender;
+            FirmId = firmId;
+        }
+
         public string Username { get; set; }
+
         public Firm Firm { get; set; }
 
-        [Index("IX_UniqeUserContraint", 2, IsUnique = true)]
         [ForeignKey("Firm")]
+        public long FirmId { get; set; }
+
         public string FirmPackageName { get; set; }
+
         public uint Age
         {
             get; set;
-            //get
-            //{
-            //    return Age;
-            //}
-            //set
-            //{
-            //    if (value > 130 || value < 10)
-            //        throw new ArgumentException("User Age must be between 10-130");
-            //    else
-            //        Age = value;
-            //}
         }
 
         public Gender Gender { get; set; }
+
     }
 }

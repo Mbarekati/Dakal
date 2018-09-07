@@ -11,52 +11,49 @@ namespace Dakal.Repositories
 {
     public class FirmRepository : IFirmRepository
     {
-        private DakalContext context;
-        public FirmRepository(DakalContext _context)
+        private DbSet<Firm> context;
+        private IUnitOfWork unitOfWork;
+
+        public FirmRepository(IUnitOfWork _unitOfWork)
         {
-            context = _context;
+            unitOfWork = _unitOfWork;
+            context = unitOfWork.FirmRepository();
         }
 
-        public async Task<bool> Delete(uint id)
+        public async Task<bool> Delete(long id)
         {
-            var firm = await context.Firms.FirstOrDefaultAsync(x => x.Id == id);
+            var firm = await context.FirstOrDefaultAsync(x => x.Id == id);
             if (firm == null)
                 return false;
-            context.Firms.Remove(firm);
+            context.Remove(firm);
             return true;
         }
 
         public IQueryable<Firm> Queryable()
         {
-            return context.Firms;
+            return context;
         }
 
-        public async Task<Firm> GetById(uint id)
+        public async Task<Firm> GetById(long id)
         {
-            var res = await context.Firms.FindAsync(id);
+            var res = await context.FindAsync(id);
             return res;
         }
 
-        public async Task<bool> Insert(Firm obj)
+        public async Task<Firm> Insert(Firm obj)
         {
-            if (obj.Id < 1)
-                return false;
-            var repFirm = await context.Firms.FindAsync(obj.Id);
-            if (repFirm != null)
-                return false;
-            context.Firms.Add(repFirm);
-            return true;
+            return context.Add(obj);
         }
 
         public async Task<bool> Update(Firm obj)
         {
             if (obj.Id < 1)
                 return false;
-            var repFirm = await context.Firms.FindAsync(obj.Id);
+            var repFirm = await context.FindAsync(obj.Id);
             if (repFirm == null)
                 return false;
-            context.Firms.AddOrUpdate(obj);
+            context.AddOrUpdate(obj);
             return true;
         }
     }
-}   
+}

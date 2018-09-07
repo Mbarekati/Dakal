@@ -51,9 +51,33 @@
     <Compile Include="DakalContext.cs" />
     <Compile Include="FirmRepository.cs" />
     <Compile Include="IAdvertisementRepository.cs" />
+    <Compile Include="Migrations\201809071044577_seenAds.cs" />
+    <Compile Include="Migrations\201809071044577_seenAds.Designer.cs">
+      <DependentUpon>201809071044577_seenAds.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809071235448_someChange.cs" />
+    <Compile Include="Migrations\201809071235448_someChange.Designer.cs">
+      <DependentUpon>201809071235448_someChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SeenAdsRepository.cs" />
+    <Compile Include="ISeenAdsRepository.cs" />
     <Compile Include="IFirmRepository.cs" />
     <Compile Include="IRepository.cs" />
+    <Compile Include="IUnitOfWork.cs" />
     <Compile Include="IUserRepository.cs" />
+    <Compile Include="Migrations\201809070607043_InitialCreate.cs" />
+    <Compile Include="Migrations\201809070607043_InitialCreate.Designer.cs">
+      <DependentUpon>201809070607043_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809070835531_feildAded.cs" />
+    <Compile Include="Migrations\201809070835531_feildAded.Designer.cs">
+      <DependentUpon>201809070835531_feildAded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809070847181_feildAdded.cs" />
+    <Compile Include="Migrations\201809070847181_feildAdded.Designer.cs">
+      <DependentUpon>201809070847181_feildAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitOfWork.cs" />
     <Compile Include="UserRepository.cs" />
@@ -67,6 +91,23 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201809070607043_InitialCreate.resx">
+      <DependentUpon>201809070607043_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809070835531_feildAded.resx">
+      <DependentUpon>201809070835531_feildAded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809070847181_feildAdded.resx">
+      <DependentUpon>201809070847181_feildAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809071044577_seenAds.resx">
+      <DependentUpon>201809071044577_seenAds.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809071235448_someChange.resx">
+      <DependentUpon>201809071235448_someChange.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

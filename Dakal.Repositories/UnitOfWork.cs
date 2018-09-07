@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Data.Entity;
 using Dakal.Models;
+using Dakal.Repositories.Migrations;
 
 namespace Dakal.Repositories
 {
-    public class UnitOfWork : IDisposable
+    public class UnitOfWork : IDisposable, IUnitOfWork
     {
         private DakalContext context = null;
         public UnitOfWork()
@@ -11,50 +13,16 @@ namespace Dakal.Repositories
             context = new DakalContext();
         }
 
-        IRepository<User> userRepository = null;
-        IRepository<Advertisement> advertisementRepository = null;
-        IRepository<Firm> firmRepository = null;
-        public IRepository<User> UserRepository
-        {
-            get
-            {
-                if (userRepository == null)
-                {
-                    userRepository = new UserRepository(context);
-                }
-                return userRepository;
-            }
-        }
+        DbSet<User> Users = null;
+        DbSet<Advertisement> Advertisements = null;
+        DbSet<Firm> Firms = null;
+        DbSet<SeenAds> SeenAds = null;
 
-        public IRepository<Advertisement> AdvertisementRepository
-        {
-            get
-            {
-                if (advertisementRepository == null)
-                {
-                    advertisementRepository = new AdvertisementRepository(context);
-                }
-                return advertisementRepository;
-            }
-        }
 
-        public IRepository<Firm> FirmRepository
+        public async void SaveChanges()
         {
-            get
-            {
-                if (firmRepository == null)
-                {
-                    firmRepository = new FirmRepository(context);
-                }
-                return firmRepository;
-            }
+            await context.SaveChangesAsync();
         }
-
-        public void SaveChanges()
-        {
-            context.SaveChanges();
-        }
-
 
         private bool disposed = false;
 
@@ -76,5 +44,24 @@ namespace Dakal.Repositories
             GC.SuppressFinalize(this);
         }
 
+        public DbSet<User> UserRepository()
+        {
+            return context.Users;
+        }
+
+        public DbSet<Advertisement> AdvertisementRepository()
+        {
+            return context.Advertisements;
+        }
+
+        public DbSet<Firm> FirmRepository()
+        {
+            return context.Firms;
+        }
+
+        public DbSet<SeenAds> SeenAdsRepository()
+        {
+            return context.SeenAds;
+        }
     }
 }

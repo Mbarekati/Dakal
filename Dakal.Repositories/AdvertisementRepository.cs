@@ -11,51 +11,47 @@ namespace Dakal.Repositories
 {
     public class AdvertisementRepository : IAdvertisementRepository
     {
-        private DakalContext context;
-        public AdvertisementRepository(DakalContext _context)
+        private DbSet<Advertisement> context;
+        private IUnitOfWork unitOfWork;
+        public AdvertisementRepository(IUnitOfWork _unitOfWork)
         {
-            context = _context;
+            unitOfWork = _unitOfWork;
+            context = unitOfWork.AdvertisementRepository();
         }
 
-        public async Task<bool> Delete(uint id)
+        public async Task<bool> Delete(long id)
         {
-            var ad = await context.Advertisements.FirstOrDefaultAsync(x => x.Id == id);
+            var ad = await context.FirstOrDefaultAsync(x => x.Id == id);
             if (ad == null)
                 return false;
-            context.Advertisements.Remove(ad);
+            context.Remove(ad);
             return true;
         }
 
         public IQueryable<Advertisement> Queryable()
         {
-            return context.Advertisements;
+            return context;
         }
 
-        public async Task<Advertisement> GetById(uint id)
+        public async Task<Advertisement> GetById(long id)
         {
-            var res = await context.Advertisements.FindAsync(id);
+            var res = await context.FindAsync(id);
             return res;
         }
 
-        public async Task<bool> Insert(Advertisement obj)
+        public async Task<Advertisement> Insert(Advertisement obj)
         {
-            if (obj.Id < 1)
-                return false;
-            var repad = await context.Advertisements.FindAsync(obj.Id);
-            if (repad != null)
-                return false;
-            context.Advertisements.Add(obj);
-            return true;
+            return context.Add(obj);
         }
 
         public async Task<bool> Update(Advertisement obj)
         {
             if (obj.Id < 1)
                 return false;
-            var repad = await context.Advertisements.FindAsync(obj.Id);
+            var repad = await context.FindAsync(obj.Id);
             if (repad == null)
                 return false;
-            context.Advertisements.AddOrUpdate(obj);
+            context.AddOrUpdate(obj);
             return true;
         }
     }

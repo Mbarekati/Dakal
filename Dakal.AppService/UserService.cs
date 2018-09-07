@@ -17,19 +17,35 @@ namespace Dakal.AppService
             userRepository = _userRepositroy;
         }
 
-        public Task<bool> CreateUser(string username, string appName, string age, Gender gender)
+        public async Task<User> CreateUserAndGet(string username, string appName, uint age, Gender gender, long firmId)
         {
-            throw new NotImplementedException();
+            if (!await IsUserExist(username, appName))
+            {
+                var user = new User(username.ToLower(), appName.ToLower(), age, gender, firmId);
+                var res = await userRepository.Insert(user);
+                return res;
+            }
+            return null;
         }
 
         public async Task<bool> IsUserExist(string username, string appName)
         {
-            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(appName))
-                throw new ArgumentNullException();
-            var user = await userRepository.Queryable().FirstOrDefaultAsync(x => x.Username == username && x.FirmPackageName == appName);
+            var user = await userRepository.Queryable().
+                FirstOrDefaultAsync(x => x.Username == username.ToLower() && x.FirmPackageName == appName.ToLower());
             if (user == null)
                 return false;
             return true;
+        }
+
+        public async Task<User> GetUser(string username, string appName)
+        {
+            var user = await userRepository.Queryable().FirstOrDefaultAsync(x => x.Username == username.ToLower() && x.FirmPackageName == appName.ToLower());
+            return user;
+        }
+
+        Task<bool> IUserService.CreateUser(string username, string appName, uint age, Gender gender)
+        {
+            throw new NotImplementedException();
         }
     }
 }

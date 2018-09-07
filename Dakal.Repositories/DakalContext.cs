@@ -10,13 +10,14 @@ namespace Dakal.Repositories
 {
     public class DakalContext : DbContext
     {
-        internal DakalContext() : base("DakalDB")
+        public DakalContext() : base("Data Source=DESKTOP-NEI9004;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;Database=DakalDatabase;")
         {
         }
 
-        internal DbSet<User> Users { get; set; }
-        internal DbSet<Advertisement> Advertisements { get; set; }
-        internal DbSet<Firm> Firms { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Advertisement> Advertisements { get; set; }
+        public DbSet<Firm> Firms { get; set; }
+        public DbSet<SeenAds> SeenAds { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
