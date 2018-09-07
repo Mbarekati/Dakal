@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Runtime.Remoting.Messaging;
 using Dakal.Models;
 using Dakal.Repositories.Migrations;
 
@@ -12,7 +13,9 @@ namespace Dakal.Repositories
         {
             context = new DakalContext();
         }
-     
+
+        public DakalContext Context => context;
+
         public void SaveChanges()
         {
             context.SaveChanges();
@@ -39,23 +42,10 @@ namespace Dakal.Repositories
         }
 
         public DbSet<User> UserRepository()
-        {      
+        {
             return context.Users;
         }
 
-        public DbSet<Advertisement> AdvertisementRepository()
-        {
-            return context.Advertisements;
-        }
-
-        public DbSet<Firm> FirmRepository()
-        {
-            return context.Firms;
-        }
-
-        public DbSet<SeenAds> SeenAdsRepository()
-        {
-            return context.SeenAds;
-        }
+        public DakalContext GetDakalContext() => context;
     }
 }

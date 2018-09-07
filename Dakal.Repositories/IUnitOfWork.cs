@@ -10,11 +10,7 @@ namespace Dakal.Repositories
 {
     public interface IUnitOfWork
     {
-        DbSet<User> UserRepository();
-        DbSet<Advertisement> AdvertisementRepository();
-        DbSet<Firm> FirmRepository();
-        DbSet<SeenAds> SeenAdsRepository();
-
+        DakalContext GetDakalContext();
         void SaveChanges();
     }
 }

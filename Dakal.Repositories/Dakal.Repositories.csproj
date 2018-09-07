@@ -59,6 +59,7 @@
     <Compile Include="Migrations\201809071235448_someChange.Designer.cs">
       <DependentUpon>201809071235448_someChange.cs</DependentUpon>
     </Compile>
+    <Compile Include="Repository.cs" />
     <Compile Include="SeenAdsRepository.cs" />
     <Compile Include="ISeenAdsRepository.cs" />
     <Compile Include="IFirmRepository.cs" />
