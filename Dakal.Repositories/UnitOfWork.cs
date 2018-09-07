@@ -12,16 +12,10 @@ namespace Dakal.Repositories
         {
             context = new DakalContext();
         }
-
-        DbSet<User> Users = null;
-        DbSet<Advertisement> Advertisements = null;
-        DbSet<Firm> Firms = null;
-        DbSet<SeenAds> SeenAds = null;
-
-
-        public async void SaveChanges()
+     
+        public void SaveChanges()
         {
-            await context.SaveChangesAsync();
+            context.SaveChanges();
         }
 
         private bool disposed = false;
@@ -45,7 +39,7 @@ namespace Dakal.Repositories
         }
 
         public DbSet<User> UserRepository()
-        {
+        {      
             return context.Users;
         }
 

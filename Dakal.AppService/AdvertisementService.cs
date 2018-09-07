@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net.Http;
@@ -27,15 +28,20 @@ namespace Dakal.AppService
                 string responseBody = await response.Content.ReadAsStringAsync();
                 var predictRes = JsonConvert.DeserializeObject<PredictAdvertisementResponse>(responseBody);
                 var selectedTag = GetSelectedTag(predictRes);
-                return await advertisementRepository.Queryable().
+                var maxCount = advertisementRepository.Queryable().Where(x => x.Tags.ToLower().Contains(selectedTag.ToLower())).Count();
+                var res = advertisementRepository.Queryable().
                     Where(x => x.Tags.ToLower().Contains(selectedTag.ToLower())).
                     OrderBy(x => x.Id).
-                    Skip(new Random().
-                        Next(0, advertisementRepository.
-                            Queryable().Where(x => x.Tags.ToLower().
-                            Contains(selectedTag.ToLower())).Count())).
-                    Take(1).FirstOrDefaultAsync();
+                    Skip(new Random().Next(0, maxCount)).Take(1).FirstOrDefault();
+                if (res == null)
+                    res = advertisementRepository.Queryable().First();
+                return res;
             }
+        }
+
+        public IEnumerable<Advertisement> GetAdvertisement()
+        {
+            return advertisementRepository.Queryable().ToList();
         }
 
         private string GetSelectedTag(PredictAdvertisementResponse predictRes)

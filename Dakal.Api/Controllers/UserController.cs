@@ -69,7 +69,7 @@ namespace Dakal.Api.Controllers
                     }
                     else
                         user = await userService.GetUser(model.username, model.appPackageName);
-                    var ad = await advertisementService.GetAdvertisement(model.age, model.gender);
+                    var ad = advertisementService.GetAdvertisement(model.age, model.gender);
                     if (ad != null)
                     {
                         await seenAdsService.AdSentToUser(user.Id, ad.Id);
@@ -93,6 +93,30 @@ namespace Dakal.Api.Controllers
 
 
         [HttpPost]
+        [Route("GetAdvertisementForDemo")]
+        public async Task<HttpResponseMessage> GetAdvertisementForDemo(GetAdDTO model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var res = advertisementService.GetAdvertisement();
+                    return Request.CreateResponse(HttpStatusCode.OK, new ServiceResult()
+                    {
+                        Result = res,
+                        IsSuccess = true
+                    });
+                }
+                catch (Exception e)
+                {
+                    loggerService.WriteLogToText(e);
+                    return Request.CreateResponse(HttpStatusCode.InternalServerError);
+                }
+            }
+            return Request.CreateResponse(HttpStatusCode.BadRequest, "The Sent Parameter Is Not Correct");
+        }
+
+        [HttpPost]
         [Route("UserCompletedSeeingAd")]
         public async Task<HttpResponseMessage> UserCompletedSeeingAd(UserCompletedSeeingAd model)
         {
@@ -104,6 +128,7 @@ namespace Dakal.Api.Controllers
                 if (seenAdId < 1)
                     return Request.CreateResponse(HttpStatusCode.NotFound, "The SeenAd Not Found");
                 var res = await seenAdsService.AdSeenCompleted(seenAdId);
+                unitOfWork.SaveChanges();
                 if (res)
                     return Request.CreateResponse(HttpStatusCode.OK, new ServiceResult() { IsSuccess = true });
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, new ServiceResult() { IsSuccess = false });

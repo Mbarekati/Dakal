@@ -252,6 +252,20 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="Files\face\health.jpg" />
+    <Content Include="Files\face\oralb.jpg" />
+    <Content Include="Files\paint\banking.png" />
+    <Content Include="Files\paint\edu.jpg" />
+    <Content Include="Files\paint\family.png" />
+    <Content Include="Files\paint\game.png" />
+    <Content Include="Files\paint\health.png" />
+    <Content Include="Files\paint\travel.png" />
+    <Content Include="Files\pazzel\edu.jpg" />
+    <Content Include="Files\pazzel\game.png" />
+    <Content Include="Files\pazzel\health.png" />
+    <Content Include="Files\pazzel\movie.png" />
+    <Content Include="Files\pazzel\music.png" />
+    <Content Include="Files\pazzel\travel.jpg" />
     <Content Include="Global.asax" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -310,6 +324,8 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <Content Include="Files\paint\.directory" />
+    <Content Include="Files\pazzel\.directory" />
     <None Include="packages.config" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />

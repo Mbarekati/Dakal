@@ -11,6 +11,6 @@ namespace Dakal.AppService
     public interface IAdvertisementService
     {
         Task<Advertisement> GetAdvertisement(uint age, Gender gender);
-        
+        IEnumerable<Advertisement> GetAdvertisement();
     }
 }

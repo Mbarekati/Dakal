@@ -24,6 +24,7 @@ namespace Dakal.AppService
             if (seenAd != null)
             {
                 seenAd.UserCompletedAction = true;
+                await seenAdsRepository.Update(seenAd);
                 return true;
             }
             return false;
