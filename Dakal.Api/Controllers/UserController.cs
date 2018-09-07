@@ -69,7 +69,7 @@ namespace Dakal.Api.Controllers
                     }
                     else
                         user = await userService.GetUser(model.username, model.appPackageName);
-                    var ad = advertisementService.GetAdvertisement(model.age, model.gender);
+                    var ad = await advertisementService.GetAdvertisement(model.age, model.gender);
                     if (ad != null)
                     {
                         await seenAdsService.AdSentToUser(user.Id, ad.Id);
