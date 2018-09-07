@@ -10,7 +10,7 @@ namespace Dakal.Repositories
 {
     public class DakalContext : DbContext
     {
-        public DakalContext() : base("Data Source=DESKTOP-NEI9004;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;Database=DakalDatabase;")
+        public DakalContext() : base("Data Source=DESKTOP-NEI9004;Integrated Security=True;Trusted_Connection=True;Database=DakalDatabase;")
         {
         }
 
